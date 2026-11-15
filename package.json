@@ -1,16 +1,25 @@
 {
   "name": "orangehrm-automation",
   "version": "1.0.0",
-  "description": "",
+  "description": "Automatización de pruebas E2E de OrangeHRM (Login, PIM y Leave) con Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "clean": "node -e \"['cypress/reports','cypress/screenshots','cypress/videos'].forEach(d=>require('fs').rmSync(d,{recursive:true,force:true}))\"",
+    "report:merge": "mochawesome-merge \"cypress/reports/json/reporte-pruebas*.json\" -o cypress/reports/merged.json",
+    "report:html": "node scripts/generate-html-report.js",
+    "report": "npm run report:merge && npm run report:html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "cypress": "^16.2.1"
+    "cypress": "^16.2.1",
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
   }
 }
